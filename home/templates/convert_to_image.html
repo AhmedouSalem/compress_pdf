@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+<head>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='css/style.css') }}">
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="form-container">
+            <h1 >Convert Image To PDF</h1>
+            <form action="/image_to_pdf" method="post" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                  <input type="file" class="form-control" name="image_file" id="inputGroupFile02" accept=".png, .jpg, .jpeg, .gif" required>
+                  <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Convert To PDF</button>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
