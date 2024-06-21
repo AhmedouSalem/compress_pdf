@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+<head>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='css/style.css') }}">
+</head>
+<body>
+    {% block content %}
+        <h1 style="margin-top:20px;">Welcome ,dear visitor, to my website for processing PDF </h1>
+    {% endblock %}
+</body>
+</html>

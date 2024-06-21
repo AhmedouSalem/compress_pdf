@@ -1,3 +1,5 @@
+import os
+
 from PDFNetPython3.PDFNetPython import PDFDoc, PDFNet, Optimizer, ImageSettings, SDFDoc, OptimizerSettings
 
 def optimize_pdf(input_path):
@@ -24,11 +26,11 @@ def optimize_pdf(input_path):
     # est plus petit.
     image_settings.ForceRecompression(True)
     
-    # cette option n'est pas couramment utilisée car elle peut
-    # peut potentiellement conduire à des fichiers plus volumineux. Il devrait être activé
-    # seulement si la compression de sortie spécifiée doit être appliquée
-    # à chaque image d'un type donné quelle que soit la taille de l'image de sortie
-    #image_settings.ForceChanges(True)
+    """cette option n'est pas couramment utilisée car elle peut
+    peut potentiellement conduire à des fichiers plus volumineux. Il devrait être activé
+    seulement si la compression de sortie spécifiée doit être appliquée
+    à chaque image d'un type donné quelle que soit la taille de l'image de sortie """
+    # image_settings.ForceChanges(True)
 
     opt_settings = OptimizerSettings()
     opt_settings.SetColorImageSettings(image_settings)
@@ -38,7 +40,12 @@ def optimize_pdf(input_path):
     Optimizer.Optimize(doc, opt_settings)
     
     # Sauvegarde le document optimisé
-    output_path = 'optimized.pdf'
+    # Obtenez le nom du fichier d'entrée sans le chemin d'accès
+    input_filename = os.path.basename(input_path)
+
+    # Créez le chemin de sortie en concaténant le nom du fichier d'entrée avec "_optimized.pdf"
+    output_filename = input_filename.split('.')[0] + "_optimized.pdf"
+    output_path = os.path.join(os.path.dirname(input_path), output_filename)
     doc.Save(output_path, SDFDoc.e_linearized)
     doc.Close()
 
